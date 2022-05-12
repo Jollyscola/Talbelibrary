@@ -1,0 +1,108 @@
+@mixin input {
+  border:none;
+  font-weight: normal;
+  margin-right: 12px;
+  padding: 8px;
+  font-size: 16px;
+  color: #222;
+}
+
+input[type="radio"] {
+  transform: scale(1.25);
+}
+
+input.lov-search,
+input.lov-search.focus {
+  border: none;
+  color: $black;
+  font-size: 14px;
+  font-weight: normal;
+  background: transparent;
+  border-bottom: 2px solid $black;
+}
+
+
+
+input.lov-result:focus {
+  border: none;
+  color: $black;
+  font-size: 14px;
+  font-weight: normal;
+  background: transparent;
+  border-bottom: 5px dotted $black;
+}
+
+//hover
+input[type="text"]:hover,
+input[type="password"]:hover
+{
+  box-shadow: 0 0 0 1px rgba($info, 0.8);
+  cursor: text;
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba($info, 0.8);
+  }
+}
+
+
+.street{
+  border:none;
+  input[type="text"],
+  input[type="password"],
+  input[type="text"]:enabled,
+  input[enabled="enabled"]{
+    border: none;
+    border-bottom: 2px solid $black;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="text"]:disabled,
+  input[disabled="disabled"] {
+    border:none;
+    border-bottom: 2px dotted $black;
+  }
+
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="text"]:enabled,
+input[enabled="enabled"]{
+     @include input();
+       background-color: transparent;
+      transition: all 0.18s ease;
+      border-bottom: 2px solid $black;
+  }
+
+//disabled
+input[type="text"],
+input[type="password"],
+input[type="text"]:disabled,
+input[disabled="disabled"] {
+  @include input();
+  background-color: transparent;
+  // border: 1px solid $gray;
+  transition: all 0.18s ease;
+  border-bottom: 2px dotted $black;
+}
+
+
+
+
+input.lov-result,
+input.lov-result:disabled,
+input.lov-result[disabled="disabled"] {
+  border: none;
+  // color: black;
+  font-size: 14px;
+  font-weight: normal;
+  background: transparent;
+}
+
+//invalid
+input[type="text"].invalid,
+input[type="password"].invalid,
+select.invalid {
+  border: 1px solid $red;
+}

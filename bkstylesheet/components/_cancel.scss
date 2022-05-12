@@ -1,0 +1,15 @@
+.canceltext {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-style: italic;
+  color:red;
+  font-weight: 900;
+
+  &:empty{
+    width: 0;
+    height: 0;
+    display:none;
+  }
+}
+

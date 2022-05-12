@@ -1,0 +1,9 @@
+.delays {
+  display: flex;
+  margin-bottom: 24px;
+  padding: 16px 12px;
+  border-radius: 4px;
+  background: map-get($colors, "lightblue" );
+  box-shadow: $base-box-shadow;
+  background-color: $white;
+}

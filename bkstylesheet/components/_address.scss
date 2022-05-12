@@ -1,0 +1,25 @@
+.addresses {
+  display: flex;
+  margin-bottom: 24px;
+  padding: 16px 12px;
+  border-radius: 4px;
+  background: $lightblue;
+  box-shadow: $base-box-shadow;
+    &-overview {
+      display: flex;
+      padding-right: $base-padding-left-right;
+      background: $white;
+      margin-left:10px;
+      border: black solid 4px;
+      padding: 10px;
+      &:last-child{
+        margin-left:80px;
+      }
+    }
+    &-middle{
+      left:2%;
+      display:inline-flex;
+      position: relative;
+    }
+}
+

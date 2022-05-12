@@ -1,0 +1,123 @@
+
+
+/* Styled Checkbox */
+.styled-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.styled-checkbox + label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+}
+
+.styled-checkbox + label:before {
+  content: "";
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 20px;
+  height: 20px;
+  background: #d2d6dc;
+  border-radius: 4px;
+
+}
+
+.styled-checkbox:hover + label:before {
+  background: #d2d6dc;
+}
+
+.styled-checkbox:hover + label {
+  color: #53585f;
+}
+
+.styled-checkbox:hover + label:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  background: #7aa3c2;
+  width: 2px;
+  height: 2px;
+  box-shadow: 2px 0 0 #7aa3c2, 4px 0 0 #7aa3c2, 4px -2px 0 #7aa3c2,
+    4px -4px 0 #7aa3c2, 4px -6px 0 #7aa3c2, 4px -8px 0 #7aa3c2;
+  transform: rotate(45deg);
+}
+
+.styled-checkbox:focus + label:before {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.styled-checkbox:checked + label:before {
+  background: #d0c710;
+}
+
+.styled-checkbox:disabled + label {
+  color: #b8b8b8;
+  cursor: not-allowed;
+}
+
+.styled-checkbox:disabled + label:before {
+  box-shadow: none;
+  background: #ddd;
+}
+
+.styled-checkbox:checked + label:after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  background: #222;
+  width: 2px;
+  height: 2px;
+  box-shadow: 2px 0 0 #222, 4px 0 0 #222, 4px -2px 0 #222, 4px -4px 0 #222,
+    4px -6px 0 #222, 4px -8px 0 #222;
+  transform: rotate(45deg);
+}
+
+
+.reprimande {
+  display: block;
+  position: relative;
+  padding: 5px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 17px;
+  border: 2px black solid;
+  width: 125px;
+
+  .checkbox__style:after {
+    content: "\2713";
+    text-align: center;
+    color:white;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+  }
+  .todo:checked + .checkbox__style:after   {
+    display: block;
+  }
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+.checkbox__style {
+  position: absolute;
+   right: 5%;
+   top:7%;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border:2px solid black;
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+}
+
+

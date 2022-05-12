@@ -1,0 +1,37 @@
+/* reset styles */
+//variables & functions
+// @import 'abstracts/utilities';
+
+//base & layour
+@import 'abstracts/functions';
+@import 'abstracts/mixin';
+@import 'abstracts/variables';
+
+@import 'base/utilities';
+@import 'base/base';
+@import 'base/animations';
+
+
+
+
+@import 'components/button';
+@import 'components/address';
+@import 'components/actions';
+@import 'components/delays';
+@import 'components/topbar';
+@import 'components/line';
+@import 'components/menu';
+@import 'components/complaints';
+@import 'components/input';
+@import 'components/select';
+@import 'components/checkbox';
+@import 'components/indicator';
+@import 'components/tooptips';
+@import 'components/cancel';
+
+@import 'layout/photo';
+
+//page
+@import 'page/home'
+// @import 'styles';
+

@@ -1,0 +1,84 @@
+.btn-close{
+  position: absolute;
+  top:0;
+  right: 22px;
+  font-size: 22px;
+  margin-left: 50px;
+  text-decoration: none;
+}
+
+button {
+  display:inline-block;
+  border:0.16em solid rgba($black,0);
+  border-radius: 20px;
+  text-decoration:none;
+  padding: 4px;
+
+  text-align:center;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+
+
+.btn{
+  font-weight: bold;
+  color:$black;
+  text-shadow: 0 0.04em 0.04em rgba($black,0.35);
+  padding: 7px 14px;
+  &:hover{
+    transform: scale(1.05);
+    box-shadow: 2px 2px 2px rgba($black,0.2);
+  }
+  &:active{
+    background-color: rgba($black,5);
+  }
+  @each $key, $val in $colors{
+    &-border-#{$key}{
+      border: 2px solid $val;
+    }
+  }
+  &-large{
+    width:110px
+  }
+  &-action{
+    width:90px;
+  }
+
+  background-color: initial;
+  @each $key, $val in $colors{
+    &-#{$key}{
+      background-image: linear-gradient(-180deg, lighten($val,15%), $val);
+    }
+  }
+}
+
+
+
+.buttons {
+      margin-top: 50px;
+      margin-left: 5px;
+      order: 2;
+
+ }
+
+
+
+
+
+    .close-button {
+      background: transparent;
+      color: #fff;
+      font-size: 24px;
+      z-index: 1;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin-right: auto;
+      text-decoration: none;
+
+    }
+
+
+

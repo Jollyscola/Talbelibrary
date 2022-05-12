@@ -1,0 +1,9 @@
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $red;
+  display: inline-block;
+  margin-right: 4px;
+  box-shadow: 0 0 0 2px rgba($dark, 0.2);
+}

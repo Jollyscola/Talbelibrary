@@ -1,0 +1,25 @@
+{
+  "name": "webdesign-hovedopgaven",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Table.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-rename": "^2.0.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-purgecss": "^4.1.3",
+    "gulp-sass": "^5.1.0",
+    "lite-server": "^2.6.1",
+    "sass": "^1.49.8",
+    "typescript": "^4.6.4"
+  }
+}

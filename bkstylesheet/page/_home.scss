@@ -1,0 +1,33 @@
+
+.page {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  position: absolute;
+  // overflow-x: scroll;
+  border-collapse: collapse;
+  // background: #edf2f6;
+  background: $lightblue;
+}
+
+.formarea-container {
+  padding: 12px 12px 24px 12px;
+  border-radius: 8px;
+  background: $lightblue;
+  margin: 24px auto;
+  // box-shadow: $base-box-shadow-l;
+  width: 90%;
+}
+
+th
+{
+  text-align: left;
+  padding-left: 15px;
+}
+
+.label {
+  font-weight: bold;
+  width: 250px;
+  display: inline-block;
+}
