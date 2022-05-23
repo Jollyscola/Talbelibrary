@@ -1,5 +1,43 @@
-.spacing {
-width: 20px;
-padding-left: 10px;
+// .spacing {
+// width: 20px;
+// padding-left: 10px;
+// }
+
+
+.sort{
+    cursor: pointer;
 }
 
+.sort::before{
+    content: '\25B6'; 
+    color: $dark; 
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.th-sort-asc::before{
+    transform: rotate(90deg);
+}
+
+
+
+.vertical {
+
+    thead {
+      float: left;   
+    }
+    thead th {
+      display: block;   
+    }
+    
+   tbody {
+      float: left;   
+    }
+    tbody tr {
+      display: block;
+      float: left;
+    }
+    tbody td {
+      display: block;
+    }
+}

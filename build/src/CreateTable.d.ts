@@ -23,14 +23,10 @@ export declare class CreateTable {
         heading: string;
         data: string;
     }[]);
-    vertikaltable(value: {
+    horvtable(value: {
         heading: string;
         data: string;
-    }[]): void;
-    horisontalttable(value: {
-        heading: string;
-        data: string;
-    }[]): void;
+    }[], firstnumber: number, secondnumber: number): void;
     headercontent(value: {
         heading: string;
         data: string;
@@ -38,7 +34,7 @@ export declare class CreateTable {
     datacontent(value: {
         heading: string;
         data: string;
-    }[], i: number, j: number, k: number, horv: boolean): HTMLTableCellElement;
+    }[], i: number, j: number, k: number): HTMLTableCellElement;
     create(): string;
     update(options: TableOptions): void;
 }

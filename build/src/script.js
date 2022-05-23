@@ -17,7 +17,7 @@ export class Test {
         return new CreateTable({
             captionoftable: "Table",
             headline: this.headline,
-            sizeofTable: [4, 4],
+            sizeofTable: [10, 10],
             headingVeorHor: 0,
             headingisrow: 0,
             rowofstarting: 0,

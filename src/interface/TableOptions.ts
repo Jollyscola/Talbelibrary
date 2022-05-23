@@ -1,17 +1,19 @@
 
 
-enum horizontal{
-    vertikal = 0,
-    horisontalt = 1
+enum horizontalOrvertikal{
+   
+    horisontalt = 0,
+    vertikal = 1
 }
 
 
 
 export interface TableOptions
 {
+    captionoftable: string,
     contenttable?:  {}[];
     sizeofTable: [number,number];
-    headingVeorHor?: horizontal;
+    headingVeorHor?: horizontalOrvertikal;
     headingisrow?: number;
     sorttable?: boolean;
     rowofstarting?: number;
@@ -20,5 +22,8 @@ export interface TableOptions
     {
         heading?: string;
         data?: string;
+        vertical?: string;
+        horizontal?: string;
+
     }
 }

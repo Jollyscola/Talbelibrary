@@ -25,6 +25,10 @@ export class CreateTable {
             this.options.classes.heading = "heading";
         if (this.options.classes.data == null)
             this.options.classes.data = "data";
+        if (this.options.classes.horizontal == null)
+            this.options.classes.horizontal = "horizontal";
+        if (this.options.classes.vertical == null)
+            this.options.classes.vertical = "vertical";
         this.headingclass = (this.options.classes.heading).trim();
         this.dataclass = (this.options.classes.data).trim();
         if (this.tableElem == null)
@@ -61,60 +65,40 @@ export class CreateTable {
         this.startingofrow = value;
     }
     set contenttable(value) {
-        if (this.veorhor == 0)
-            this.horisontalttable(value);
-        else if (this.veorhor == 1)
-            this.vertikaltable(value);
+        let options = this.options.classes;
+        this.tableElem.classList.remove("horisont", "vertical");
+        if (this.veorhor == 0 && (options === null || options === void 0 ? void 0 : options.horizontal)) {
+            console.log("horisont");
+            this.tableElem.classList.add(options === null || options === void 0 ? void 0 : options.horizontal);
+            this.horvtable(value, this.horizontal, this.vertical);
+        }
+        else if (this.veorhor == 1 && (options === null || options === void 0 ? void 0 : options.vertical)) {
+            console.log("vertikal");
+            this.tableElem.classList.add(options === null || options === void 0 ? void 0 : options.vertical);
+            this.horvtable(value, this.vertical, this.horizontal);
+        }
         else
             console.log("something went wrong");
     }
-    vertikaltable(value) {
-        for (let i = 0; i < this.horizontal; i++) {
-            let tableRow = document.createElement("tr");
-            let m = 0;
-            for (let j = 0; j < this.vertical; j++) {
-                if (j == this.rowofheading) {
-                    let onetableHead = document.createElement("th");
-                    if (value[i] != undefined && this.startingofrow <= j)
-                        onetableHead.textContent = value[i].heading;
-                    if (this.dataclass !== null)
-                        onetableHead.classList.add(this.headingclass);
-                    else
-                        onetableHead.textContent = "_";
-                    if (tableRow != null)
-                        tableRow.appendChild(onetableHead);
-                }
-                else if (j !== this.rowofheading) {
-                    let onetableDate = this.datacontent(value, i, j, m, true);
-                    tableRow.appendChild(onetableDate);
-                }
-                else {
-                    console.log("something went wrong");
-                }
-                if (this.startingofrow <= j)
-                    m++;
-            }
-            this.tableElem.appendChild(tableRow);
-        }
-    }
-    horisontalttable(value) {
+    horvtable(value, firstnumber, secondnumber) {
         let k = 0;
-        for (let i = 0; i < this.vertical; i++) {
+        for (let i = 0; i < firstnumber; i++) {
             let tableRow = document.createElement("tr");
-            for (let j = 0; j < this.horizontal; j++) {
+            for (let j = 0; j < secondnumber; j++) {
                 if (i === this.rowofheading) {
                     let onetableHead = document.createElement("th");
-                    if (value[j] != undefined && this.startingofrow <= i)
-                        onetableHead.textContent = value[j].heading;
-                    else
-                        onetableHead.textContent = "_";
-                    if (this.dataclass !== null)
+                    if (value[j] != undefined && this.startingofrow <= i) {
                         onetableHead.classList.add(this.headingclass);
+                        onetableHead.textContent = value[j].heading;
+                    }
+                    else {
+                        onetableHead.textContent = "_";
+                    }
                     if (tableRow != null)
                         tableRow.appendChild(onetableHead);
                 }
                 else if (i !== this.rowofheading) {
-                    let onetableDate = this.datacontent(value, i, j, k, false);
+                    let onetableDate = this.datacontent(value, i, j, k);
                     if (tableRow != null)
                         tableRow.appendChild(onetableDate);
                 }
@@ -136,6 +120,37 @@ export class CreateTable {
         }
         this.tableElem.appendChild(this.tbody);
     }
+    // vertikaltable(value:{heading:string, data:string}[]): void
+    // {
+    //     console.log("vertikal")
+    //     for (let i = 0; i < this.horizontal; i++) 
+    //     {
+    //         let tableRow = <HTMLTableRowElement> document.createElement("tr")!; 
+    //         let m = 0;
+    //         for (let j = 0; j < this.vertical; j++)
+    //         {
+    //            if(i == this.rowofheading)
+    //            {
+    //                let onetableHead = <HTMLTableCellElement> document.createElement("th")!; 
+    //                if(value[j] != undefined && this.startingofrow <= j)onetableHead.textContent = value[j].heading;
+    //                if(this.dataclass !== null) onetableHead.classList.add(this.headingclass);
+    //                else onetableHead.textContent = "_";
+    //                if(tableRow != null) tableRow.appendChild(onetableHead)
+    //                if(this.thead != null) this.thead.appendChild(tableRow)
+    //            } else if(i !== this.rowofheading){
+    //                console.log(value[i])
+    //              let onetableDate = this.datacontent(value,i,j,m,true)
+    //              if(tableRow != null) tableRow.appendChild(onetableDate)
+    //              if(this.tbody != null) this.tbody.appendChild(tableRow)  
+    //         }   else {
+    //             console.log("something went wrong")
+    //         }      
+    //          if(this.startingofrow <= i) m++  
+    //         }
+    //         this.tableElem.appendChild(this.thead)
+    //         this.tableElem.appendChild(this.tbody)
+    //     } 
+    // }
     headercontent(value, i, j, onetableHead) {
         if (value[j] != undefined && this.startingofrow <= i)
             onetableHead.textContent = value[j].heading;
@@ -144,20 +159,12 @@ export class CreateTable {
         if (this.dataclass !== null)
             onetableHead.classList.add(this.headingclass);
     }
-    datacontent(value, i, j, k, horv) {
+    datacontent(value, i, j, k) {
         let onetableDate = document.createElement("td");
-        if (horv) {
-            if (value[i] !== undefined && value[i].data[k] !== undefined && this.startingofrow <= j)
-                onetableDate.textContent = value[i].data[k];
-            else
-                onetableDate.textContent = "_";
-        }
-        else {
-            if (value[j] !== undefined && value[j].data[k] !== undefined && this.startingofrow <= i)
-                onetableDate.textContent = value[j].data[k];
-            else
-                onetableDate.textContent = "_";
-        }
+        if (value[j] !== undefined && value[j].data[k] !== undefined && this.startingofrow <= i)
+            onetableDate.textContent = value[j].data[k];
+        else
+            onetableDate.textContent = "_";
         if (this.dataclass !== null)
             onetableDate.classList.add(this.dataclass);
         return onetableDate;

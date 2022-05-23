@@ -14,6 +14,8 @@ export interface TableOptions {
     classes?: {
         heading?: string;
         data?: string;
+        vertical?: string;
+        horizontal?: string;
     };
 }
 export {};

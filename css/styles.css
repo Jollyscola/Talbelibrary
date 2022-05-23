@@ -1263,3 +1263,35 @@ th {
   width: 250px;
   display: inline-block;
 }
+
+.sort {
+  cursor: pointer;
+}
+
+.sort::before {
+  content: "▶";
+  color: #242424;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.th-sort-asc::before {
+  transform: rotate(90deg);
+}
+
+.vertical thead {
+  float: left;
+}
+.vertical thead th {
+  display: block;
+}
+.vertical tbody {
+  float: left;
+}
+.vertical tbody tr {
+  display: block;
+  float: left;
+}
+.vertical tbody td {
+  display: block;
+}

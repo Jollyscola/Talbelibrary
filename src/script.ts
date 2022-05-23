@@ -1,6 +1,6 @@
 
  import { CreateTable } from './CreateTable.js';
-let table  = document.querySelector(".table")! as HTMLInputElement;
+let table  = document.querySelector(".table")! as HTMLTableElement;
 
 
 export class Test{
@@ -11,26 +11,32 @@ export class Test{
     tablejson =  
     [{
         heading: "first",
-       data: ["Hans", "Gustav", "pluto"]
+       data: ["Hans", "Gustav", "Pluto"]
    },{
         heading: "last",
        data:["Brain", "Davs"]
    },{
            heading: "address",
-           data:["Vestebro","Nørreport","københavnsvej"]
+           data:["Vestebro","Nørreport","Københavnsvej"]
    }];
 
    createtable(){  
     return new CreateTable({
+        captionoftable: "Table",
         headline: this.headline,
         sizeofTable: [10,10],
         headingVeorHor: 0,
-        headingisrow: 3,
-        rowofstarting: 3,
+        headingisrow: 0,
+        rowofstarting: 0,
         contenttable: this.tablejson,
-        sorttable: false,        
+        sorttable: true,       
+     
    }).create()
    }
+
+
+
+
 }
 
 table.outerHTML = new Test().createtable();
