@@ -18,20 +18,18 @@ export  class CreateTable
     protected horizontal: number= 0;
     protected vertical: number = 0;
     
-    //hvilket række skal heading start
     protected rowofheading: number = 0;
 
-    //hvilket row skal den på
-    protected startingofrow: number = 0;
     
-    //TableOptions er interface
    
     //start bygge table
     private tableElem : HTMLTableElement;
+    private captions : HTMLTableCaptionElement;
 
     protected sorting: boolean = false;
     private dataclass:string = "";
 	private headingclass:string = "";
+    protected search:boolean = false;
     private options:TableOptions;
    protected thead: HTMLTableSectionElement
    protected tbody: HTMLTableSectionElement
@@ -48,6 +46,7 @@ export  class CreateTable
         this.headingclass = (this.options.classes.heading).trim();
 		this.dataclass = (this.options.classes.data).trim();
         if(this.tableElem == null) this.tableElem = document.createElement("table");
+        if(this.captions == null) this.captions = document.createElement("caption");
         this.thead = document.createElement("thead")!; 
         this.tbody = document.createElement("tbody")!;
        
@@ -57,9 +56,9 @@ export  class CreateTable
     
 
     set captionoftable(value:any){
-        let captions = document.createElement("caption");
-        captions.textContent = value;
-        this.tableElem.appendChild(captions);
+        console.log(value)
+        this.captions.textContent = value.trim();
+        this.tableElem.appendChild(this.captions);
     }
 
     set sizeofTable(value: [number,number])
@@ -81,18 +80,17 @@ export  class CreateTable
 
     set sorttable(value: any){
         if(value){
-            console.log("hello")
         setTimeout(() => {
-            console.log("sort")
+            
             sorttable()
         }, 1);
         }
     }
 
 
-    set rowofstarting(value: number){
-        this.startingofrow = value
-    }
+    // set rowofstarting(value: number){
+    //     this.startingofrow = value
+    // }
 
     set contenttable(value: {heading:string, data:string}[])
     {
@@ -113,7 +111,20 @@ export  class CreateTable
         else console.log("something went wrong")
     }
   
+    set searchtable(value : any){
+       
+    
+        if(value){
+            searchtable(this.captions);
+        }
 
+ 
+        
+    }
+
+    searchintable(): void{
+        console.log("hello")
+    }
   
 
     horvtable(value:{heading:string, data:string}[],firstnumber: number , secondnumber:number): void
@@ -130,9 +141,9 @@ export  class CreateTable
                 if(i === this.rowofheading)
                 {   
 
-                       
+                       console.log("hello", this.rowofheading)
                         let onetableHead = <HTMLTableCellElement> document.createElement("th")!; 
-                        if( value[j] != undefined && this.startingofrow <= i) 
+                        if( value[j] != undefined) 
                         {
                         onetableHead.classList.add(this.headingclass);
                         onetableHead.textContent = value[j].heading;
@@ -146,9 +157,10 @@ export  class CreateTable
                 }
                 else if(i !== this.rowofheading)
                 {
-                   let  onetableDate= this.datacontent(value,i,j,k)
+                   let  onetableDate = this.datacontent(value,i,j,k)
                   
-                    if(tableRow != null)  tableRow.appendChild(onetableDate)  
+                    if(tableRow != null)  tableRow.appendChild(onetableDate)
+                    else console.log("there is no table")  
                                     
                 } 
                 else 
@@ -159,7 +171,6 @@ export  class CreateTable
                
               
             }
-            if(this.startingofrow <= i) k++
                  
             if(i == this.rowofheading)
             {
@@ -173,53 +184,19 @@ export  class CreateTable
               
                 this.tbody.appendChild(tableRow) 
             }
+            k++
 
         }
         this.tableElem.appendChild(this.tbody)
     }
 
-    // vertikaltable(value:{heading:string, data:string}[]): void
-    // {
-    //     console.log("vertikal")
-    //     for (let i = 0; i < this.horizontal; i++) 
-    //     {
-    //         let tableRow = <HTMLTableRowElement> document.createElement("tr")!; 
-    //         let m = 0;
-           
-    //         for (let j = 0; j < this.vertical; j++)
-    //         {
-               
-    //            if(i == this.rowofheading)
-    //            {
-               
-    //                let onetableHead = <HTMLTableCellElement> document.createElement("th")!; 
-    //                if(value[j] != undefined && this.startingofrow <= j)onetableHead.textContent = value[j].heading;
-    //                if(this.dataclass !== null) onetableHead.classList.add(this.headingclass);
-    //                else onetableHead.textContent = "_";
-
-    //                if(tableRow != null) tableRow.appendChild(onetableHead)
-    //                if(this.thead != null) this.thead.appendChild(tableRow)
-    //            } else if(i !== this.rowofheading){
-    //                console.log(value[i])
-    //              let onetableDate = this.datacontent(value,i,j,m,true)
-    //              if(tableRow != null) tableRow.appendChild(onetableDate)
-    //              if(this.tbody != null) this.tbody.appendChild(tableRow)  
-    //         }   else {
-    //             console.log("something went wrong")
-    //         }      
-    //          if(this.startingofrow <= i) m++  
-    //         }
-    //         this.tableElem.appendChild(this.thead)
-    //         this.tableElem.appendChild(this.tbody)
-    //     } 
-      
-    // }
+  
 
     headercontent(value:{heading:string, data:string}[],i: number,j: number,onetableHead : HTMLTableCellElement){
 
         
         
-        if( value[j] != undefined && this.startingofrow <= i) onetableHead.textContent = value[j].heading;
+        if( value[j] != undefined ) onetableHead.textContent = value[j].heading;
         else onetableHead.textContent = "_";
 
         if(this.dataclass !== null) onetableHead.classList.add(this.headingclass);
@@ -230,7 +207,7 @@ export  class CreateTable
 
         let onetableDate = <HTMLTableCellElement> document.createElement("td")!;  
        
-            if(value[j] !== undefined && value[j].data[k] !== undefined && this.startingofrow <= i) onetableDate.textContent = value[j].data[k]; 
+            if(value[j] !== undefined && value[j].data[k] !== undefined) onetableDate.textContent = value[j].data[k]; 
             else onetableDate.textContent = "_";
      
             if(this.dataclass !== null) onetableDate.classList.add(this.dataclass);
@@ -251,6 +228,23 @@ export  class CreateTable
     }
 }
 
+
+function searchtable(captions:any){
+
+
+    let input = document.createElement("INPUT");
+    console.log("searchtable")
+    input.setAttribute("type","text")
+    input.setAttribute("id","myinput")
+    input.setAttribute("placeholder","search")
+    // input.setAttribute("onkeyup", this.sortTable)
+
+    input.addEventListener("keyup", function(e) { console.log(e)})
+    captions.append(input)   
+    console.log(input)
+   
+}
+
 function sorttable(){
 
     const table = document.querySelector('table')!;
@@ -259,6 +253,7 @@ function sorttable(){
     const headers = table.querySelectorAll('th')!;
 
     headers.forEach(function (header, index) {
+        if(charIsLetter(header.textContent)) header.classList.add("sort");
                 header.addEventListener('click', function () {
                     // This function will sort the column
                 

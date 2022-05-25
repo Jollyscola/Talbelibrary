@@ -10,7 +10,7 @@ export interface TableOptions {
     headingisrow?: number;
     sorttable?: boolean;
     rowofstarting?: number;
-    headline: string;
+    searchtable?: boolean;
     classes?: {
         heading?: string;
         data?: string;

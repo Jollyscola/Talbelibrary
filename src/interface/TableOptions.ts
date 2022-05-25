@@ -10,14 +10,14 @@ enum horizontalOrvertikal{
 
 export interface TableOptions
 {
-    captionoftable: string,
+    captionoftable: string;
     contenttable?:  {}[];
     sizeofTable: [number,number];
     headingVeorHor?: horizontalOrvertikal;
     headingisrow?: number;
     sorttable?: boolean;
     rowofstarting?: number;
-    headline:string;
+    searchtable?: boolean;
     classes?: 
     {
         heading?: string;

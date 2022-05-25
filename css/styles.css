@@ -1264,26 +1264,52 @@ th {
   display: inline-block;
 }
 
-.sort {
+.horizontal {
+  position: relative;
+  padding: 10px;
+}
+.horizontal .sort {
   cursor: pointer;
 }
-
-.sort::before {
+.horizontal caption {
+  height: 45px;
+}
+.horizontal caption input {
+  position: absolute;
+  left: 20px;
+  top: 0px;
+}
+.horizontal .sort::before {
   content: "▶";
   color: #242424;
   display: inline-block;
   margin-right: 5px;
+  padding: 0;
 }
-
-.th-sort-asc::before {
+.horizontal .th-sort-asc::before {
   transform: rotate(90deg);
 }
+.horizontal tbody td {
+  padding-left: 15px;
+}
 
+.vertical {
+  padding: 10px;
+}
 .vertical thead {
   float: left;
 }
 .vertical thead th {
   display: block;
+}
+.vertical .sort {
+  cursor: pointer;
+}
+.vertical .sort::before {
+  content: "▼";
+  color: #242424;
+  display: inline-block;
+  margin-right: 5px;
 }
 .vertical tbody {
   float: left;
@@ -1294,4 +1320,8 @@ th {
 }
 .vertical tbody td {
   display: block;
+  padding: 0 5px;
+}
+.vertical .th-sort-asc::before {
+  transform: rotate(-90deg);
 }

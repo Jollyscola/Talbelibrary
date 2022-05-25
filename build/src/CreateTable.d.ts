@@ -4,11 +4,12 @@ export declare class CreateTable {
     protected horizontal: number;
     protected vertical: number;
     protected rowofheading: number;
-    protected startingofrow: number;
     private tableElem;
+    private captions;
     protected sorting: boolean;
     private dataclass;
     private headingclass;
+    protected search: boolean;
     private options;
     protected thead: HTMLTableSectionElement;
     protected tbody: HTMLTableSectionElement;
@@ -18,11 +19,12 @@ export declare class CreateTable {
     set headingVeorHor(value: any);
     set headingisrow(value: number);
     set sorttable(value: any);
-    set rowofstarting(value: number);
     set contenttable(value: {
         heading: string;
         data: string;
     }[]);
+    set searchtable(value: any);
+    searchintable(): void;
     horvtable(value: {
         heading: string;
         data: string;

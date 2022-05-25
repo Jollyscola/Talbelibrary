@@ -1,12 +1,14 @@
 
- import { CreateTable } from './CreateTable.js';
+ import { CreateForms } from './CreateForms.js';
+import { CreateTable } from './CreateTable.js';
 let table  = document.querySelector(".table")! as HTMLTableElement;
+let contestform  = document.querySelector(".contestform")! as HTMLTableElement;
 
 
 export class Test{
     constructor(){
     }
-    headline: "overskrift";
+    headline: "Table";
 
     tablejson =  
     [{
@@ -20,18 +22,39 @@ export class Test{
            data:["Vestebro","Nørreport","Københavnsvej"]
    }];
 
+
+   formsjson = [{
+       text:"Bredde/længde",
+       label: "sizeofTable"
+   },{
+    text:"overskrift",
+    label: "captionoftable"
+   },
+    {
+        text: "horisontalt eller vertikal",
+        label: "headingVeorHor"
+    }
+    ]
+
    createtable(){  
     return new CreateTable({
-        captionoftable: "Table",
-        headline: this.headline,
+        captionoftable: "table",
         sizeofTable: [10,10],
         headingVeorHor: 0,
-        headingisrow: 0,
-        rowofstarting: 0,
+        headingisrow: 2,
+        // rowofstarting: 4,
         contenttable: this.tablejson,
         sorttable: true,       
+        searchtable: true,
      
    }).create()
+   }
+
+   createforms(){
+       return new CreateForms({
+        contentforms: this.formsjson,
+        heading: "hello"
+       }).create()
    }
 
 
@@ -42,7 +65,7 @@ export class Test{
 table.outerHTML = new Test().createtable();
 
 
-
+// contestform.outerHTML = new Test().createforms();
 
 
 
