@@ -8,7 +8,7 @@ let table  = document.querySelector(".table")! as HTMLTableElement;
 let contestform  = document.querySelector(".contestform")! as HTMLTableElement;
 let form  = document.querySelector("form")! as HTMLFormElement;
 
-console.log("agenta")
+
 
 export class Test{
     constructor(){
@@ -55,12 +55,27 @@ export class Test{
    }
 
    createtable(){
-       console.log(form)
-        return new CreateTable(contestform,{
-            sizeofTable: [5,5]
-     }).create()
+        console.log(form)
+       console.log(form["bredde"].value)
+      
+       
+       form.addEventListener("submit",event => {
+   
+           event.preventDefault()
+           console.log(contestform)
+           if(contestform.firstChild){
+            contestform.removeChild(contestform.firstChild)
+            }
+           return new CreateTable(contestform,{
+            sizeofTable: [form["bredde"].value,form["længde"].value],
+            captionoftable: form["overskrift"].value
+
+       }).create()
+     })
+     
     }
 
+    
     submit_form(e){
         e.preventdeafult
         console.log("hello")

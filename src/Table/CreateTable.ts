@@ -2,6 +2,8 @@
  import {TableOptions} from "./interface/TableOptions";
  import { TableEntry } from "./interface/TableEntry";
 
+
+
 const DEAFULT_OPTIONS = {
     sizeofTable:[7,7],
     headingVeorHor: 0,
@@ -38,8 +40,11 @@ export class CreateTable implements EventListenerObject
     
     constructor(tableElem: HTMLTableElement, options: TableOptions)
     {
-         this.options = options;
-         this.tableElem = tableElem
+          this.options = options;
+
+        if(this.tableElem == null) this.tableElem = document.createElement("table");
+        tableElem.appendChild(this.tableElem)
+        
         if (options == null) this.options
         if (this.options.classes == null) this.options.classes = {};
         if (this.options.classes.heading == null) this.options.classes.heading = "heading";
@@ -49,10 +54,11 @@ export class CreateTable implements EventListenerObject
         this.headingclass = (this.options.classes.heading).trim();
 		this.dataclass = (this.options.classes.data).trim();
         
-        this.thead = document.createElement("thead")!; 
-        this.tbody = document.createElement("tbody")!;
+        if(this.thead == null) this.thead = document.createElement("thead")!; 
+        if(this.tbody == null) this.tbody = document.createElement("tbody")!;
+       
         if(this.captions == null) this.captions = document.createElement("caption");
-        if(this.tableElem == null) this.tableElem = document.createElement("table");
+   
        
 
 
@@ -84,9 +90,13 @@ export class CreateTable implements EventListenerObject
     
 
     set captionoftable(value:any){
+        if(typeof value == "string"){
         this.captions.textContent = value.trim();
        
         this.tableElem.appendChild(this.captions);
+    } else {
+        console.log("need to be string: ", typeof value)
+    }
     }
 
     set sizeofTable(value: [number,number])
@@ -107,10 +117,10 @@ export class CreateTable implements EventListenerObject
 
 
     set sorttable(value: any){
-        if(value){
-            this.sort()
-        }
+        this.sorting = value;
     }
+
+
 
     set contenttable(value: TableEntry[])
     {
@@ -124,7 +134,7 @@ export class CreateTable implements EventListenerObject
             this.input.setAttribute("type","text")
             this.input.setAttribute("placeholder","search") 
             this.input.addEventListener("keyup",this) 
-             this.captions.append(this.input);  
+            this.captions.append(this.input);  
         }
                
         
@@ -132,8 +142,10 @@ export class CreateTable implements EventListenerObject
 
 
     sort(){
-        const headers = this.tableElem.querySelectorAll('th');
-        headers.forEach((header,index) => {
+        const headers = this.tableElem;
+        let th = headers.querySelectorAll("th")
+        console.log(th)
+        th.forEach((header,index) => {
              if(charIsLetter(header.textContent)) header.classList.add("sort");
                 
                      header.addEventListener('click',() => {
@@ -179,6 +191,13 @@ export class CreateTable implements EventListenerObject
            
     }
 
+    clear(){
+    let tbl = this.tableElem.querySelector("table")
+    if(tbl) tbl.parentNode?.removeChild(tbl)
+    }
+
+
+
     horvtable(value:TableEntry[],firstnumber: number , secondnumber:number): void
     {
         let k: number = 0;
@@ -199,7 +218,7 @@ export class CreateTable implements EventListenerObject
                             if(value[j] && value[j] !== undefined && value[j].heading != undefined ) 
                             {
                             onetableHead.classList.add(this.headingclass);
-                            console.log(value[j].heading)
+                       
                             onetableHead.textContent = value[j].heading;
                             }
                             else
@@ -292,7 +311,7 @@ export class CreateTable implements EventListenerObject
     create(): string{
 
         let options =this.options.classes
-        console.log(this.vertical,this.horizontal)
+      
         this.tableElem.classList.remove("horisont", "vertical")
         if(this.veorhor == 0 && options?.horizontal) 
         {   
@@ -311,7 +330,9 @@ export class CreateTable implements EventListenerObject
             if(options?.horizontal) this.tableElem.classList.add(options.horizontal)
             this.horvtable(this.data,this.horizontal,this.vertical);
         }
-
+        if(this.search){
+            this.sort();
+        }
         return this.tableElem.outerHTML
     }
 
