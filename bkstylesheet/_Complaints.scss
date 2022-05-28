@@ -6,21 +6,27 @@
 
 
 
+caption {
+  height: 60px;
+    input {
+        display:block;
+        // text-align: left;
+       position: absolute;
+
+      left: 20px;
+      margin-bottom: 10px;
+    }
+  }
+
+
+
 .horizontal{
   position: relative;
   padding:10px;
       .sort{
         cursor: pointer;
     }
-    caption {
-      height: 45px;
-      input {
-        // text-align: left;
-      position: absolute;
-      left: 20px;
-      top: 0px;
-      }
-    }
+
     .sort::before{
         content: '\25B6'; 
         color: $dark; 

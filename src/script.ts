@@ -1,9 +1,14 @@
 
- import { CreateForms } from './CreateForms.js';
-import { CreateTable } from './CreateTable.js';
+ import { CreateForms } from './Forms/CreateForms.js';
+import { CreateTable } from './Table/CreateTable.js';
+// import {test} from './Table/test.js'
+
+
 let table  = document.querySelector(".table")! as HTMLTableElement;
 let contestform  = document.querySelector(".contestform")! as HTMLTableElement;
+let form  = document.querySelector("form")! as HTMLFormElement;
 
+console.log("agenta")
 
 export class Test{
     constructor(){
@@ -36,19 +41,31 @@ export class Test{
     }
     ]
 
-   createtable(){  
-    return new CreateTable({
-        captionoftable: "table",
-        sizeofTable: [10,10],
+   table(){  
+    return new CreateTable(table,{
+        captionoftable: "table", 
+        sizeofTable: [5,5],
         headingVeorHor: 0,
-        headingisrow: 2,
-        // rowofstarting: 4,
+        headingisrow: 0,
         contenttable: this.tablejson,
         sorttable: true,       
         searchtable: true,
      
    }).create()
    }
+
+   createtable(){
+       console.log(form)
+        return new CreateTable(contestform,{
+            sizeofTable: [5,5]
+     }).create()
+    }
+
+    submit_form(e){
+        e.preventdeafult
+        console.log("hello")
+    }
+   
 
    createforms(){
        return new CreateForms({
@@ -62,10 +79,11 @@ export class Test{
 
 }
 
-table.outerHTML = new Test().createtable();
+new Test().table();
+
+new Test().createtable()
 
 
-// contestform.outerHTML = new Test().createforms();
 
 
 

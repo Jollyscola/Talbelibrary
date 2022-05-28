@@ -10,7 +10,7 @@ enum horizontalOrvertikal{
 
 export interface TableOptions
 {
-    captionoftable: string;
+    captionoftable?: string;
     contenttable?:  {}[];
     sizeofTable: [number,number];
     headingVeorHor?: horizontalOrvertikal;

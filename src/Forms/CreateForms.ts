@@ -38,10 +38,6 @@ export class CreateForms
 
     formstable(value: {label:string, text:string}[]) :void{
         console.log(value);
-        // for (let index = 0; index < heading.length; index++) {
-           
-            
-        // }
     }
 
     update(options: FormOptions)

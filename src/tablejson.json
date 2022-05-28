@@ -1,0 +1,12 @@
+{
+    "tablejson":  
+[{
+    "heading": "first",
+   "data": ["Hans", "Gustav", "Pluto"]
+},{
+    "heading": "last",
+   "data":["Brain", "Davs"]
+},{
+       "heading": "address",
+       "data":["Vestebro","Nørreport","Københavnsvej"]
+}]}
