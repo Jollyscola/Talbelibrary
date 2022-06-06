@@ -1,6 +1,7 @@
 .addresses {
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  margin-right: 25px;
   padding: 16px 12px;
   border-radius: 4px;
   background: $lightblue;
@@ -12,14 +13,16 @@
       margin-left:10px;
       border: black solid 4px;
       padding: 10px;
-      &:last-child{
-        margin-left:80px;
-      }
+     
     }
     &-middle{
       left:2%;
       display:inline-flex;
       position: relative;
+    }
+    &:last-child{
+     
+      margin-right: 0;
     }
 }
 

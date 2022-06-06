@@ -5,8 +5,13 @@ import { CreateTable } from './Table/CreateTable.js';
 
 
 let table  = document.querySelector(".table")! as HTMLTableElement;
+
+
+
 let contestform  = document.querySelector(".contestform")! as HTMLTableElement;
 let form  = document.querySelector("form")! as HTMLFormElement;
+let formtable  = document.querySelector(".formtable")! as HTMLTableElement;
+
 
 
 
@@ -30,73 +35,71 @@ export class Test{
 
    formsjson = [{
        text:"Bredde/længde",
-       label: "sizeofTable"
+       choice: [{label: "bredde",type:"text",name:"width"},{label: "længde",type:"text", name:"length"}],
+       button: true
+       
    },{
     text:"overskrift",
-    label: "captionoftable"
+    name:"caption"
    },
     {
         text: "horisontalt eller vertikal",
-        label: "headingVeorHor"
+        choice: [{label: "horizontal",type:"radio",name:"horv"},{label: "vertical",type:"radio",name:"horv"}],
+        // label: "headingVeorHor"
+        button: false
     }
     ]
 
    table(){  
+       console.log("hello")
     return new CreateTable(table,{
-        captionoftable: "table", 
-        sizeofTable: [5,5],
+        captionoftable: "Table", 
+        sizeofTable: [5,8],
         headingVeorHor: 0,
-        headingisrow: 0,
         contenttable: this.tablejson,
         sorttable: true,       
-        searchtable: true,
-     
+        searchtable: false, 
    }).create()
    }
 
-   createtable(){
-        console.log(form)
-       console.log(form["bredde"].value)
-      
-       
-       form.addEventListener("submit",event => {
-   
-           event.preventDefault()
-           console.log(contestform)
-           if(contestform.firstChild){
-            contestform.removeChild(contestform.firstChild)
-            }
-           return new CreateTable(contestform,{
-            sizeofTable: [form["bredde"].value,form["længde"].value],
-            captionoftable: form["overskrift"].value
+//    createtable(){
 
-       }).create()
-     })
-     
-    }
 
-    
-    submit_form(e){
-        e.preventdeafult
-        console.log("hello")
-    }
+
+//        form.addEventListener("submit",event => {
    
+//            event.preventDefault()
+//            if(contestform.firstChild){
+//             contestform.removeChild(contestform.firstChild)
+//             }
+//            return new CreateTable(contestform,
+//             {
+//             sizeofTable: [form["bredde"].value,form["længde"].value],
+//             captionoftable: form["overskrift"].value}
+//             ).create()
+//      })
+//     }
 
    createforms(){
-       return new CreateForms({
+
+    return new CreateForms(contestform,formtable,{
         contentforms: this.formsjson,
-        heading: "hello"
+        heading: "Create Forms"
        }).create()
-   }
-
-
-
-
+    
+     
+       
+    }
 }
 
-new Test().table();
 
-new Test().createtable()
+
+
+
+
+new Test().table();
+new Test().createforms();
+//  new Test().createtable();
 
 
 

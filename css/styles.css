@@ -647,7 +647,8 @@ button {
 
 .addresses {
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  margin-right: 25px;
   padding: 16px 12px;
   border-radius: 4px;
   background: #dddddd;
@@ -661,13 +662,13 @@ button {
   border: black solid 4px;
   padding: 10px;
 }
-.addresses-overview:last-child {
-  margin-left: 80px;
-}
 .addresses-middle {
   left: 2%;
   display: inline-flex;
   position: relative;
+}
+.addresses:last-child {
+  margin-right: 0;
 }
 
 .actions {
@@ -1266,11 +1267,11 @@ th {
 
 caption {
   height: 60px;
+  position: relative;
 }
 caption input {
   display: block;
   position: absolute;
-  left: 20px;
   margin-bottom: 10px;
 }
 

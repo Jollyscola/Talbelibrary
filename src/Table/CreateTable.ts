@@ -32,18 +32,19 @@ export class CreateTable implements EventListenerObject
 
     private options:TableOptions;
     protected search = false;
+    protected td: HTMLElement;
    protected thead: HTMLTableSectionElement
    protected tbody: HTMLTableSectionElement
     private input: HTMLInputElement;
     protected data: TableEntry[]
-
+    protected empty: string = "_";
     
     constructor(tableElem: HTMLTableElement, options: TableOptions)
     {
           this.options = options;
 
-        if(this.tableElem == null) this.tableElem = document.createElement("table");
-        tableElem.appendChild(this.tableElem)
+     if(this.tableElem == null) this.tableElem = document.createElement("table");
+    if(this.tableElem) tableElem.appendChild(this.tableElem)
         
         if (options == null) this.options
         if (this.options.classes == null) this.options.classes = {};
@@ -58,24 +59,21 @@ export class CreateTable implements EventListenerObject
         if(this.tbody == null) this.tbody = document.createElement("tbody")!;
        
         if(this.captions == null) this.captions = document.createElement("caption");
-   
-       
-
-
-        this.update({...DEAFULT_OPTIONS,...options})
+        this.update({...options})
     }
 
 
-    public handleEvent(event: Event): void {
+    public handleEvent(event: Event): void
+    {
         if(event.type == "keyup"){
         let fitler = this.input.value.toUpperCase() 
         let tr = this.tableElem.getElementsByTagName("tr");
-        let td: HTMLElement;
+       
         let txtValue: any;
         for (let i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if(td){
-                txtValue = td.textContent;
+            this.td = tr[i].getElementsByTagName("td")[0];
+            if(this.td){
+                txtValue = this.td.textContent;
                
                 if(txtValue.toUpperCase().indexOf(fitler) > -1){
                     tr[i].style.display = "";
@@ -120,8 +118,6 @@ export class CreateTable implements EventListenerObject
         this.sorting = value;
     }
 
-
-
     set contenttable(value: TableEntry[])
     {
         this.data = value;
@@ -160,8 +156,6 @@ export class CreateTable implements EventListenerObject
         if(table == null) return
         const dirModifier = asc ? 1 : -1;
 
-
-       
         const rows = Array.from(this.tbody.querySelectorAll("tr"));
     
         // Sort each row
@@ -191,10 +185,6 @@ export class CreateTable implements EventListenerObject
            
     }
 
-    clear(){
-    let tbl = this.tableElem.querySelector("table")
-    if(tbl) tbl.parentNode?.removeChild(tbl)
-    }
 
 
 
@@ -223,11 +213,11 @@ export class CreateTable implements EventListenerObject
                             }
                             else
                             {
-                            onetableHead.textContent = "_";
+                            onetableHead.textContent = this.empty;
                             }
                             if(tableRow != null) tableRow.appendChild(onetableHead)
                         } else {
-                            onetableHead.textContent = "_";
+                            onetableHead.textContent = this.empty;
                         }
                     
                 }
@@ -274,7 +264,7 @@ export class CreateTable implements EventListenerObject
         
         
         if( value[j] && typeof value[j].heading !== "undefined") return value[j].heading;
-        else onetableHead.textContent = "_";
+        else onetableHead.textContent = this.empty;
 
         if(this.dataclass !== null) onetableHead.classList.add(this.headingclass);
         
@@ -296,13 +286,13 @@ export class CreateTable implements EventListenerObject
             }
             else 
             {
-                onetableDate.textContent = "_";
+                onetableDate.textContent = this.empty;
             }
      
             if(this.dataclass !== null) onetableDate.classList.add(this.dataclass);
             
         } else {
-            onetableDate.textContent = "_";
+            onetableDate.textContent = this.empty;
         }
         return onetableDate
     }
@@ -311,22 +301,19 @@ export class CreateTable implements EventListenerObject
     create(): string{
 
         let options =this.options.classes
-      
-        this.tableElem.classList.remove("horisont", "vertical")
+        if(options?.horizontal && options?.vertical)this.tableElem.classList.remove(options?.horizontal, options?.vertical)
         if(this.veorhor == 0 && options?.horizontal) 
         {   
-            console.log("horisont")
             this.tableElem.classList.add(options?.horizontal)
             this.horvtable(this.data,this.horizontal,this.vertical);
         }
         else if(this.veorhor == 1 && options?.vertical) 
         {
-            console.log("vertikal")
         this.tableElem.classList.add(options.vertical)
         this.horvtable(this.data,this.vertical,this.horizontal);
         }
         else {
-            console.log("horisont")
+           
             if(options?.horizontal) this.tableElem.classList.add(options.horizontal)
             this.horvtable(this.data,this.horizontal,this.vertical);
         }
