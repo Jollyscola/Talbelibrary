@@ -2,7 +2,7 @@
 
 
 export interface TableEntry{
-    id:any;
+    id?:any;
     heading:string;
-    data:string;
+    data:string[];
 }

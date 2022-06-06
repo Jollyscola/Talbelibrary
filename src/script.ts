@@ -2,7 +2,7 @@
  import { CreateForms } from './Forms/CreateForms.js';
 import { CreateTable } from './Table/CreateTable.js';
 // import {test} from './Table/test.js'
-
+import { TableEntry} from './Table/interface/TableEntry'
 
 let table  = document.querySelector(".table")! as HTMLTableElement;
 
@@ -20,7 +20,7 @@ export class Test{
     }
     headline: "Table";
 
-    tablejson =  
+    tablejson: TableEntry[] =  
     [{
         heading: "first",
        data: ["Hans", "Gustav", "Pluto"]

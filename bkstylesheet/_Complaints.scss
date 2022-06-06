@@ -11,8 +11,7 @@ caption {
   position: relative;
     input {
         display:block;
-        // text-align: left;
-       position: absolute;
+         position: absolute;
 
       
       margin-bottom: 10px;
@@ -27,7 +26,6 @@ caption {
       .sort{
         cursor: pointer;
     }
-
     .sort::before{
         content: '\25B6'; 
         color: $dark; 
@@ -39,18 +37,12 @@ caption {
     .th-sort-asc::before{
         transform: rotate(90deg);
     }
-
     tbody td {
       padding-left: 15px;
-      
     }
 }
-
-
 .vertical {
-
     padding:10px;
-
     thead {
       float: left;   
     }
@@ -61,15 +53,12 @@ caption {
     .sort{
       cursor: pointer;
   }
-  
   .sort::before{
       content: '\25BC'; 
       color: $dark; 
       display: inline-block;
       margin-right: 5px;
   }
- 
-    
    tbody {
       float: left;   
     }
@@ -82,7 +71,6 @@ caption {
       padding:0 5px;
 
     }
-
     .th-sort-asc::before{
       transform: rotate(-90deg);
   }
