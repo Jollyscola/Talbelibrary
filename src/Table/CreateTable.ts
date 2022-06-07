@@ -31,7 +31,6 @@ export class CreateTable implements EventListenerObject
 	private headingclass:string = "";
 
     private options:TableOptions;
-    protected search = false;
     protected td: HTMLElement;
    protected thead: HTMLTableSectionElement
    protected tbody: HTMLTableSectionElement
@@ -124,9 +123,10 @@ export class CreateTable implements EventListenerObject
     }
   
     set searchtable(value : any){
-        if(!this.input) this.input = document.createElement("input") as HTMLInputElement;
-        this.search = value;
-        if(this.search){
+       
+        if(this.input == null) this.input = document.createElement("input") as HTMLInputElement;
+        
+        if(value){
             this.input.setAttribute("type","text")
             this.input.setAttribute("placeholder","search") 
             this.input.addEventListener("keyup",this) 
@@ -140,7 +140,6 @@ export class CreateTable implements EventListenerObject
     sort(){
         const headers = this.tableElem;
         let th = headers.querySelectorAll("th")
-        console.log(th)
         th.forEach((header,index) => {
              if(charIsLetter(header.textContent)) header.classList.add("sort");
                 
@@ -317,7 +316,7 @@ export class CreateTable implements EventListenerObject
             if(options?.horizontal) this.tableElem.classList.add(options.horizontal)
             this.horvtable(this.data,this.horizontal,this.vertical);
         }
-        if(this.search){
+        if(this.sorting){
             this.sort();
         }
         return this.tableElem.outerHTML

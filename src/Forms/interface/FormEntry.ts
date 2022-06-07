@@ -4,13 +4,17 @@
 
 
 export interface FormEntry{
-    label:string;
-    choice:[{
-        label:string,
-        type:string,
-        name:string
+    label?:string;
+    choice?:[{
+        label:string;
+        type:string;
+        name:string;
+    },{
+        label:string;
+        type:string;
+        name:string;
     }];
-    bottom:boolean;
+    button?:boolean;
     text:string;
-    name:string;
+    name?:string;
 }
