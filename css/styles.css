@@ -672,6 +672,7 @@ button {
 }
 
 .actions {
+  position: relative;
   display: flex;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -1159,6 +1160,8 @@ input[type=checkbox] {
   position: relative;
   cursor: help;
 }
+
+
 .tooltip:hover .tooltiptext-top {
   visibility: visible;
 }
@@ -1265,6 +1268,19 @@ th {
   display: inline-block;
 }
 
+.forms td {
+  padding: 2px 0;
+}
+.forms td input[type=radio] {
+  display: inline;
+  justify-content: space-between;
+  margin: 0.1rem;
+}
+
+table {
+  padding: 2px;
+}
+
 caption {
   height: 60px;
   position: relative;
@@ -1278,9 +1294,6 @@ caption input {
 .horizontal {
   position: relative;
   padding: 10px;
-}
-.horizontal .sort {
-  cursor: pointer;
 }
 .horizontal .sort::before {
   content: "▶";
@@ -1296,6 +1309,10 @@ caption input {
   padding-left: 15px;
 }
 
+.sort {
+  cursor: pointer;
+}
+
 .vertical {
   padding: 10px;
 }
@@ -1304,9 +1321,6 @@ caption input {
 }
 .vertical thead th {
   display: block;
-}
-.vertical .sort {
-  cursor: pointer;
 }
 .vertical .sort::before {
   content: "▼";

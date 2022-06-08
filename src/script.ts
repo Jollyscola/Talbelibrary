@@ -44,7 +44,8 @@ export class Test{
        
    },{
     text:"overskrift",
-    name:"caption"
+    name:"caption",
+    type:"text"
    },
     {
         text: "horisontalt eller vertikal",
@@ -54,6 +55,25 @@ export class Test{
             {label: "vertical",type:"radio",name:"horv"}
         ],
         button: false
+    },{
+        text:"search on or off",
+        choice: 
+        [
+            {label: "on",type:"radio",name:"search"},
+            {label: "off",type:"radio",name:"search"}
+        ],
+        name:"search",
+        button: false
+    }
+    ,{
+        text:"sort on or off",
+        choice: 
+        [
+            {label: "on",type:"radio",name:"sort"},
+            {label: "off",type:"radio",name:"sort"}
+        ],
+        name:"sort",
+        button: false
     }
     ]
 
@@ -61,7 +81,7 @@ export class Test{
     return new CreateTable(table,{
         captionoftable: "Table", 
         sizeofTable: [5,8],
-        headingVeorHor: 0,
+        headingVeorHor: 1,
         contenttable: this.tablejson,
         sorttable: true,       
         searchtable: true, 

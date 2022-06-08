@@ -17,4 +17,5 @@ export interface FormEntry{
     button?:boolean;
     text:string;
     name?:string;
+    type?: string;
 }

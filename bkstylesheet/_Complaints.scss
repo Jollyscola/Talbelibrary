@@ -3,29 +3,38 @@
 // padding-left: 10px;
 // }
 
+.forms {
+  td{
+  padding: 2px 0;
+  input[type="radio"]{
+    display: inline;
+    justify-content: space-between;
+    margin: .1rem;
+    
+    }
+  } 
+}
 
-
+table{
+  padding: 2px;
+}
 
 caption {
   height: 60px;
   position: relative;
     input {
         display:block;
-         position: absolute;
-
-      
+        position: absolute;
       margin-bottom: 10px;
     }
-  }
+}
 
 
 
 .horizontal{
   position: relative;
   padding:10px;
-      .sort{
-        cursor: pointer;
-    }
+ 
     .sort::before{
         content: '\25B6'; 
         color: $dark; 
@@ -41,6 +50,11 @@ caption {
       padding-left: 15px;
     }
 }
+
+.sort{
+  cursor: pointer;
+}
+
 .vertical {
     padding:10px;
     thead {
@@ -50,9 +64,9 @@ caption {
       display: block;   
     }
 
-    .sort{
-      cursor: pointer;
-  }
+
+
+   
   .sort::before{
       content: '\25BC'; 
       color: $dark; 

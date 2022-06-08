@@ -5,7 +5,7 @@
 import { FormEntry } from "./interface/FormEntry";
 import {FormOptions} from "./interface/FormOptions";
 import { CreateTable } from "../Table/CreateTable.js";
-import { TableEntry } from "../Table/interface/TableEntry"
+import { TableEntry } from "../Table/interface/TableEntry";
 
 
 
@@ -17,9 +17,8 @@ export class CreateForms implements EventListenerObject
 {
 
 
-    private options:FormOptions = {};
+    private options:FormOptions;
 
-    protected tableArray: Array<Array<String>>;
     protected tableJson: TableEntry[];
 
     private tableForm: HTMLTableElement;
@@ -27,14 +26,15 @@ export class CreateForms implements EventListenerObject
     
     private form: HTMLFormElement;
     protected contentheading: HTMLElement;
-    private formtable: HTMLTableElement
-    protected data: FormEntry[]
-    protected td: HTMLElement
-    protected tr: HTMLElement
-    protected span: HTMLElement
-    protected label: HTMLElement
-    protected input: HTMLInputElement;
-
+    private formtable: HTMLTableElement;
+    protected data: FormEntry[];
+    protected td: HTMLElement;
+    protected tr: HTMLElement;
+    // protected span: HTMLElement
+    // protected label: HTMLElement
+    // protected input: HTMLInputElement;
+    protected search: boolean = false;
+    protected sort: boolean = false;
     protected length: number = 0;
     protected width: number = 0;
     protected horv: number = 0
@@ -42,12 +42,16 @@ export class CreateForms implements EventListenerObject
     constructor(tableForm: HTMLTableElement,formtable: HTMLTableElement, options: FormOptions){
 
         this.options = options;
+        if (this.options.names == null) this.options.names = {};
         if (this.options.classes == null) this.options.classes = {};
+        
         if(this.tableForm == null) this.tableForm = document.createElement("table");
      
         tableForm.appendChild(this.tableForm)
         if(this.form == null) this.form = document.createElement("form");
-
+        if(this.options.names.search == null) this.options.names.search = "search";
+        if(this.options.names.sort == null) this.options.names.sort = "sort";
+        if(this.options.names.horv == null) this.options.names.horv = "horv";
         if (this.options.classes.length == null) this.options.classes.length = "length";
         if (this.options.classes.width == null) this.options.classes.width = "width";
         if (this.options.classes.form == null) this.options.classes.form = "forms";
@@ -68,23 +72,17 @@ export class CreateForms implements EventListenerObject
 
             if(data.value == "create"){
             if(this.formtable.firstChild){
+                console.log(this.formtable.firstChild)
                 this.formtable.removeChild(this.formtable.firstChild)
-            }
-
-            for (let i = 0; i < this.tableArray.length; i++) {
-              for (let j= 0; j< this.tableArray[i].length; j++) {
-                  
-                  this.tableJson =
-              }
-                
             }
              new CreateTable(this.formtable,{
                  sizeofTable: [this.width,this.length],
                  captionoftable: this.caption,
                  headingVeorHor:this.horv,
-                 contenttable:this.tableJson
-                 
-             }).create()
+                 contenttable:this.tableJson,
+                 searchtable:this.search,
+                 sorttable:this.sort
+             }).create() as string
             }
             if(data.value == "add"){
              
@@ -92,11 +90,16 @@ export class CreateForms implements EventListenerObject
             }
         }
         if(e.type == "change"){
-            if(e.target){
-             
-                if(data.id == this.options.classes?.horizontal) this.horv = 0;
-                else if(data.id == this.options.classes?.vertical) this.horv = 1;
             
+            if(e.target){
+                if(data.id == this.options.classes?.horizontal && data.name == this.options.names?.horv) this.horv = 0; 
+                else if(data.id == this.options.classes?.vertical && data.name == this.options.names?.horv) this.horv = 1;
+                
+                if(data.id== "on" && data.name == this.options.names?.search)this.search = true;
+                else if(data.id== "off" && data.name == this.options.names?.search) this.search = false;
+                
+                if(data.id== "on" && data.name == this.options.names?.sort)this.sort = true;
+                else if(data.id== "off" && data.name == this.options.names?.sort) this.sort = false;
             }
         }
 
@@ -121,27 +124,24 @@ export class CreateForms implements EventListenerObject
                     let x = Number(c[0]);
                     let y = Number(c[1]);
 
-                    console.log(x)
-                    console.log(y)
-
-                    this.tableArray[x][y] = data.value
-                    console.log(this.tableArray)
-                    // this.tableJson = this.tableArray
+                if(data.name == "heading") this.tableJson[y].heading = data.value
+                else if(data.name == "data") this.tableJson[y].data[x-1] = data.value
+                else console.log("something went wrong")
                 }
-              
             }
        }
     }
 
-    createcontent(length,width){
+    createcontent(length: number,width:number): void
+    {
         const form_data_table = document.createElement("table")
-        if(this.tableForm.lastChild?.nodeName == "TABLE"){
- 
-         this.tableForm.removeChild(this.tableForm.lastChild)
-           
+        if(this.tableForm.lastChild?.nodeName.toLocaleLowerCase() == "table")
+        {
+         this.tableForm.removeChild(this.tableForm.lastChild)  
         }
          
-         for (let i = 0; i < length; i++) {
+         for (let i = 0; i < length; i++)
+        {
  
              this.tr = document.createElement("tr");
              this.td = document.createElement("th");
@@ -161,13 +161,14 @@ export class CreateForms implements EventListenerObject
              {
                  this.td = document.createElement("td");
  
-                    let input = createNode("input",{
+                    let input = createNode("input",
+                    {
                         type:"text",
                         size: 3,
                         id: i + "," + j,
-                    }
-                  
-                 )
+                        name: classname,
+                    }) as HTMLInputElement
+
                  input.addEventListener("keyup", this)
                  this.td.appendChild(input)
                  this.tr.appendChild(this.td)
@@ -176,19 +177,21 @@ export class CreateForms implements EventListenerObject
              form_data_table.appendChild(this.tr)
          }
 
-         this.tableArray = new Array(length)
+        
+        this.tableJson = new Array(length)
+         for (let i = 0; i < width; i++) {
 
-         for (let index = 0; index < length; index++) {
-            
-             this.tableArray[index] = new Array(width)
+            this.tableJson[i] = {heading: "", data: []};
          }
+
+         
          this.tableForm.append(form_data_table)
  
        
  
      }
 
-    set contentforms(value: FormEntry[] ){
+    set contentforms(value: FormEntry[]){
         this.data = value;
     }
 
@@ -213,14 +216,14 @@ export class CreateForms implements EventListenerObject
         if(this.contentheading){
             this.headingcontent(this.contentheading)
         }
-       this.createformstable(this.data);
+       this.entryTable(this.data);
       
 
        let submit = createNode("input",{
         type: "submit",
         value:"create",
         class:"btn btn-white button"
-    })
+    }) as HTMLInputElement
 
        submit.addEventListener("click",this)
 
@@ -233,8 +236,7 @@ export class CreateForms implements EventListenerObject
        return this.tableForm.outerHTML;
     }
 
-    createformstable(value: FormEntry[]) : HTMLElement{
-     
+    entryTable(value: FormEntry[]) : HTMLElement{
         for (let index = 0; index < value.length; index++) {
 
             this.tr = document.createElement("tr")
@@ -270,14 +272,14 @@ export class CreateForms implements EventListenerObject
                 const label = createNode("label", {
                     for: value.choice[index].label
                    
-                });
+                }) as HTMLLabelElement;
 
                 const input = createNode("input", {
                     type: value.choice[index].type,
                     size: 2,
                     name: value.choice[index].name,
                     id: value.choice[index].label
-                });
+                }) as HTMLInputElement;
           
                if(label.htmlFor == this.options.classes?.horizontal) input.checked = true;
                
@@ -305,11 +307,13 @@ export class CreateForms implements EventListenerObject
             }
         }
          else 
-        {
+        {   
+
             const input = createNode("input", 
             {
-            type: "text",
-            name: value.name
+                type: value.type,
+                name: value.name
+
             });
             input.addEventListener("keyup",this)
             td.appendChild(input)
@@ -318,7 +322,7 @@ export class CreateForms implements EventListenerObject
         return td
     }
 
-    update(options: FormOptions)
+    update(options: FormOptions) : void
     {
         Object.entries({...options}).forEach(([key,value]) => 
         {
@@ -328,7 +332,7 @@ export class CreateForms implements EventListenerObject
 }
 
 
-function createNode(node: any, attributes: any){
+function createNode(node: string, attributes: any){
     const el = document.createElement(node);
     for(let key in attributes){
         el.setAttribute(key, attributes[key]);

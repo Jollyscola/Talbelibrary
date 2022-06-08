@@ -32,10 +32,10 @@ export class CreateTable implements EventListenerObject
 
     private options:TableOptions;
     protected td: HTMLElement;
-   protected thead: HTMLTableSectionElement
-   protected tbody: HTMLTableSectionElement
+   protected thead: HTMLTableSectionElement;
+   protected tbody: HTMLTableSectionElement;
     private input: HTMLInputElement;
-    protected data: TableEntry[]
+    protected data: TableEntry[];
     protected empty: string = "_";
     
     constructor(tableElem: HTMLTableElement, options: TableOptions)
@@ -186,7 +186,6 @@ export class CreateTable implements EventListenerObject
 
 
 
-
     horvtable(value:TableEntry[],firstnumber: number , secondnumber:number): void
     {
         let k: number = 0;
@@ -204,7 +203,7 @@ export class CreateTable implements EventListenerObject
                 {   
                         let onetableHead = <HTMLTableCellElement> document.createElement("th")!; 
                         if(value){
-                            if(value[j] && value[j] !== undefined && value[j].heading != undefined ) 
+                            if(value[j] && value[j] !== undefined && value[j].heading != undefined && value[j].heading !== "") 
                             {
                             onetableHead.classList.add(this.headingclass);
                        
