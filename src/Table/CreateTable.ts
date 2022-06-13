@@ -64,24 +64,33 @@ export class CreateTable implements EventListenerObject
 
     public handleEvent(event: Event): void
     {
-        if(event.type == "keyup"){
+        if(event.type == "keyup")
+        {
+           this.search()
+        }
+    }
+
+    search()
+    {
         let fitler = this.input.value.toUpperCase() 
         let tr = this.tableElem.getElementsByTagName("tr");
-       
-        let txtValue: any;
-        for (let i = 0; i < tr.length; i++) {
+    
+        let txtValue: string = "";
+        for (let i = 0; i < tr.length; i++) 
+        {
             this.td = tr[i].getElementsByTagName("td")[0];
             if(this.td){
-                txtValue = this.td.textContent;
-               
-                if(txtValue.toUpperCase().indexOf(fitler) > -1){
+                if(typeof this.td.textContent == "string") txtValue = this.td.textContent;
+            
+                if(txtValue.toUpperCase().indexOf(fitler) > -1)
+                {
                     tr[i].style.display = "";
                 }
-                else {
+                else
+                 {
                     tr[i].style.display = "none";
                 }
             }        
-            }
         }
     }
     
@@ -190,13 +199,10 @@ export class CreateTable implements EventListenerObject
     {
         let k: number = 0;
         
-       
+ 
         for (let i = 0; i < firstnumber; i++)
         {
-            let tableRow = <HTMLTableRowElement> document.createElement("tr")!;
-            
-
-           
+            let tableRow = <HTMLTableRowElement> document.createElement("tr")!;      
             for (let j = 0; j < secondnumber; j++)
             {
                 if(i === this.rowofheading)

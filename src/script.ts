@@ -22,14 +22,14 @@ export class Test{
 
     tablejson: TableEntry[] =  
     [{
-        heading: "first",
-       data: ["Hans", "Gustav", "Pluto"]
+        heading: "Firsname",
+       data: ["Jens", "Alexander ", "Laika"]
    },{
-        heading: "last",
-       data:["Brain", "Davs"]
+        heading: "Lastname",
+       data:["Hansen", "Skarsgård"]
    },{
-           heading: "address",
-           data:["Vestebro","Nørreport","Københavnsvej"]
+           heading: "Address",
+           data:["Vestebro","Nørrebro","Østerbro"]
    }];
 
 
@@ -79,9 +79,9 @@ export class Test{
 
    table(){  
     return new CreateTable(table,{
-        captionoftable: "Table", 
+        captionoftable: "Table Setup", 
         sizeofTable: [5,8],
-        headingVeorHor: 1,
+        headingVeorHor: 0,
         contenttable: this.tablejson,
         sorttable: true,       
         searchtable: true, 
